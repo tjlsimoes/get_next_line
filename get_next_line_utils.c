@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:57 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/04/29 13:49:13 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:36:42 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	if (s1)
 	{
-		str[i] = s1[i];
-		i++;
+		while (s1[i] != '\0')
+		{
+			str[i] = s1[i];
+			i++;
+		}
 	}
-	while (s2[i - s1_len] != '\0')
+	if (s2)
 	{
-		str[i] = s2[i - s1_len];
-		i++;
+		while (s2[i - s1_len] != '\0')
+		{
+			str[i] = s2[i - s1_len];
+			i++;
+		}
 	}
 	str[i] = '\0';
 	return (str);
@@ -77,7 +83,7 @@ void	putline_fd(char *s, int fd)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		write(fd, s[i], 1);
+		write(fd, &s[i], 1);
 		if (s[i] == '\n')
 			return ;
 		i++;

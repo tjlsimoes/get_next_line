@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:52 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/04/29 13:49:23 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:45:24 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_H
 # define BUFFER_SIZE 42
 # include <unistd.h>
+# include <stdlib.h>
 
 int	idx_line_break(char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
