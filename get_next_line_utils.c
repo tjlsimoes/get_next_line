@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:57 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/04/29 19:36:42 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:31:29 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	idx_line_break(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (-1);
 	i = 0;
 	while (str[i])
 	{
@@ -88,4 +90,45 @@ void	putline_fd(char *s, int fd)
 			return ;
 		i++;
 	}
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t		i;
+	char		*str;
+
+	str = s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = c;
+		i += 1;
+	}
+	return (str);
+}
+
+char	*get_substring(char const *s, int b, int end)
+{
+	int		i;
+	char	*substring;
+
+	if (!s)
+		return (NULL);
+	if (end == -1)
+	{
+		end = b;
+		while (s[end])
+			end++;
+	}
+	substring = (char *)malloc((end - b) + 1);
+	if (!substring)
+		return (NULL);
+	i = 0;
+	while (b + i < end && s[b + i])
+	{
+		substring[i] = s[b + i];
+		i++;
+	}
+	substring[i] = '\0';
+	return (substring);
 }

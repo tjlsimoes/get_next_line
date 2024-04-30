@@ -5,77 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 13:02:48 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/04/29 19:47:21 by tjorge-l         ###   ########.fr       */
+/*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
+/*   Updated: 2024/04/30 14:09:24 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*str_with_lb_eof(int fd, char *str)
+{
+	char	buffer[BUFFER_SIZE + 1];
+	int		chars_read;
+	int		i;
+
+	i = 0;
+	while (i < BUFFER_SIZE + 1)
+		buffer[i++] = '\0';
+	chars_read = 5;
+	while(idx_line_break(str) == -1 && chars_read)
+	{
+		chars_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[chars_read] = '\0';
+		str = ft_strjoin(str, buffer);
+		if (!str)
+			return (NULL);
+	}
+	return (str);
+}
+
+
 char	*get_next_line(int fd)
 {
 	static char	*mem;
-	int			read_output;
-	char		buffer[BUFFER_SIZE];
-	int			i;
-	char		*end_string;
+	char		*remains;
+	char		*str_til_lb_eof;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-
-	read_output = read(fd, buffer, BUFFER_SIZE);
-	if (read_output > 0)
-	{
-		mem = ft_strjoin(mem, buffer);
-		if (!mem)
-			return (NULL);
-	}
-	else if (read_output < 0)
+	mem = str_with_lb_eof(fd, mem);
+	if(!mem)
 		return (NULL);
-	i = idx_line_break(mem);
-	if (i >= 0)
-	{
-		end_string = (char *)malloc(i + 2);
-		if (!end_string)
-			return (NULL);
-		end_string[i + 1] = '\0';
-		while (i >= 0)
-		{
-			end_string[i] = mem[i];
-			i--;
-		}
-		free(mem);
-		return (end_string);
-	}
-	else
-		return (get_next_line(fd));
+	return (NULL);
+	remains = get_substring(mem, idx_line_break(mem) + 1, -1);
+	str_til_lb_eof = get_substring(mem, 0, idx_line_break(mem));
+	free(mem);
+	mem = remains;
+	return (str_til_lb_eof);
 }
-
-// char	*get_next_line(int fd)
-// {
-// 	static char	*mem;
-// 	char		*buffer;
-// 	int			i;
-
-// 	buffer = (char *)malloc(BUFFER_SIZE);
-// 	if (fd < 0)
-// 		return (NULL);
-// 	if (read(fd, buffer, BUFFER_SIZE))
-// 		mem = ft_strjoin(mem, buffer);
-// 	i = idx_line_break(mem);
-// 	free(buffer);
-// 	buffer = (char *)malloc(i + 2);
-// 	if (i >= 0)
-// 	{
-// 		buffer[i + 1] = '\0';
-// 		while (i)
-// 		{
-// 			buffer[i] = mem[i];
-// 			i--;
-// 		}
-// 		free(mem);
-// 		return (buffer);
-// 	}
-// 	else
-// 		return (get_next_line(fd));
-// }

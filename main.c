@@ -16,7 +16,7 @@ int	main(void)
 		printf("%s\n", output);
 		free(output);
 	}
-
+	close(fd);
 	// char buffer[BUFFER_SIZE];
 	// int bytes_read = read(fd, buffer, BUFFER_SIZE);
 	// printf("Bytes read: %d\n", bytes_read);
