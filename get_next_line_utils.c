@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:57 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 12:42:39 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:34:49 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ size_t	ft_strlen(const char *str)
 	return (count);
 }
 
+int	ft_strcpy(char *str, char *s, int start)
+{
+	int		i;
+
+	i = start;
+	if (s)
+	{
+		while (s[i - start] != '\0')
+		{
+			str[i] = s[i - start];
+			i++;
+		}
+	}
+	return (i);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -56,48 +72,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	i = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-	}
-	if (s2)
-	{
-		while (s2[i - s1_len] != '\0')
-		{
-			str[i] = s2[i - s1_len];
-			i++;
-		}
-	}
+	i = ft_strcpy(str, (char *)s1, i);
+	i = ft_strcpy(str, (char *)s2, s1_len);
 	str[i] = '\0';
 	return (str);
-}
-
-char	*get_substring(char const *s, int b, int end, int remains)
-{
-	int		i;
-	char	*substring;
-
-	if (!s || (b == 0 && remains))
-		return (NULL);
-	if (end == -1)
-	{
-		end = b;
-		while (s[end])
-			end++;
-	}
-	substring = (char *)malloc((end - b) + 1);
-	if (!substring)
-		return (NULL);
-	i = 0;
-	while (b + i <= end && s[b + i])
-	{
-		substring[i] = s[b + i];
-		i++;
-	}
-	substring[i] = '\0';
-	return (substring);
 }

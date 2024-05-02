@@ -7,23 +7,15 @@ int	main(void)
 	int		fd;
 	char	*output;
 
-	fd = open("foo.txt", O_RDWR);
-	output = get_next_line(fd);
-	if (!output)
-		printf("NULL\n");
-	else
+	fd = open("foo_g.txt", O_RDONLY);
+
+	while((output = get_next_line(0)))
 	{
-		printf("%s\n", output);
+		printf("%s", output);
 		free(output);
 	}
-	output = get_next_line(fd);
 	if (!output)
 		printf("NULL\n");
-	else
-	{
-		printf("%s\n", output);
-		free(output);
-	}
 	close(fd);
 	// char buffer[BUFFER_SIZE];
 	// int bytes_read = read(fd, buffer, BUFFER_SIZE);
