@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/04/30 14:09:24 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:28:30 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*get_next_line(int fd)
 	mem = str_with_lb_eof(fd, mem);
 	if(!mem)
 		return (NULL);
-	return (NULL);
 	remains = get_substring(mem, idx_line_break(mem) + 1, -1);
 	str_til_lb_eof = get_substring(mem, 0, idx_line_break(mem));
 	free(mem);
