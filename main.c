@@ -16,6 +16,14 @@ int	main(void)
 		printf("%s\n", output);
 		free(output);
 	}
+	output = get_next_line(fd);
+	if (!output)
+		printf("NULL\n");
+	else
+	{
+		printf("%s\n", output);
+		free(output);
+	}
 	close(fd);
 	// char buffer[BUFFER_SIZE];
 	// int bytes_read = read(fd, buffer, BUFFER_SIZE);

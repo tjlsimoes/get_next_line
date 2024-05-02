@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:57 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 10:28:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:22:06 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*get_substring(char const *s, int b, int end)
 	if (!substring)
 		return (NULL);
 	i = 0;
-	while (b + i < end && s[b + i])
+	while (b + i <= end && s[b + i])
 	{
 		substring[i] = s[b + i];
 		i++;
