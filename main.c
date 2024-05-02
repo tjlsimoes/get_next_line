@@ -7,9 +7,9 @@ int	main(void)
 	int		fd;
 	char	*output;
 
-	fd = open("foo_g.txt", O_RDONLY);
+	fd = open("foo_f.txt", O_RDONLY);
 
-	while((output = get_next_line(0)))
+	while((output = get_next_line(fd)))
 	{
 		printf("%s", output);
 		free(output);

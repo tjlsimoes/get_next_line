@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 14:46:38 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:40:08 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_substring(char const *s, int b, int end, int remains)
 		return (NULL);
 	if (end == -1)
 		update_end(&end, b, s);
-	substring = (char *)malloc((end - b) + 1);
+	substring = (char *)malloc((end - b) + 2);
 	if (!substring)
 		return (NULL);
 	i = 0;
