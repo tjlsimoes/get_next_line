@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:52 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 10:28:48 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:41:09 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 char	*get_next_line(int fd);
 void	putline_fd(char *s, int fd);
-char	*get_substring(char const *s, int b, int end);
+char	*get_substring(char const *s, int b, int end, int remains);
 
 #endif

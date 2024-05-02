@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:05:57 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 11:22:06 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:42:39 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,43 +76,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-void	putline_fd(char *s, int fd)
-{
-	int	i;
-
-	if (!s)
-		write(fd, "(null)", 6);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		if (s[i] == '\n')
-			return ;
-		i++;
-	}
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t		i;
-	char		*str;
-
-	str = s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = c;
-		i += 1;
-	}
-	return (str);
-}
-
-char	*get_substring(char const *s, int b, int end)
+char	*get_substring(char const *s, int b, int end, int remains)
 {
 	int		i;
 	char	*substring;
 
-	if (!s)
+	if (!s || (b == 0 && remains))
 		return (NULL);
 	if (end == -1)
 	{
