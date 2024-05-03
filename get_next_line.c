@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/02 15:40:08 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:13:20 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	*get_substring(char const *s, int b, int end, int remains)
 		free(substring);
 		return (NULL);
 	}
-	else
-		return (substring);
+	return (substring);
 }
 
 char	*str_with_lb_eof(int fd, char *str)
@@ -60,6 +59,8 @@ char	*str_with_lb_eof(int fd, char *str)
 	while (idx_line_break(str) == -1 && chars_read)
 	{
 		chars_read = read(fd, buffer, BUFFER_SIZE);
+		if (!chars_read)
+			break ;
 		if (chars_read < 0)
 			return (NULL);
 		buffer[chars_read] = '\0';
@@ -76,6 +77,7 @@ char	*get_next_line(int fd)
 	char		*remains;
 	char		*str_til_lb_eof;
 
+	// Buffer over INT_MAX
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	mem = str_with_lb_eof(fd, mem);
