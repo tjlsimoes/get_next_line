@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:20:02 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 17:31:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:57:07 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,101 +80,20 @@ char	*str_with_lb_eof(int fd, char *str)
 	return (str);
 }
 
-void	free_array(char **mem)
-{
-	int	i;
-
-	i = 0;
-	while (mem[i])
-		free(mem[i++]);
-	free(mem);
-}
-
-// char	**create_array(char **mem, int fd)
-// {
-// 	// int	i;
-
-// 	// i = 0;
-// 	// while (mem[i])
-// 	// 	free(mem[i++]);
-// 	// free(mem);
-
-// 	mem = (char **)malloc(sizeof(char *) * (fd - 3 + 1));
-// 	mem[fd - 3] = NULL;
-// 	mem[fd - 3 + 1] = NULL;
-// 	return (mem);
-// }
-
-// char	**add_row(char ***mem, int fd)
-// {
-	
-// }
-
-int	size_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
 char	*get_next_line(int fd)
 {
-	static char	**mem;
-	char		**temp;
+	static char	*mem[FD_MAX];
 	char		*remains;
 	char		*str_til_lb_eof;
-	int			i;
 
-	if (fd < 0 || BUFFER_SIZE < 1
-		|| (fd > 3 && !mem))
+	if (fd < 0 || BUFFER_SIZE < 1 )
 		return (NULL);
-	i = 0;
-	if (!mem)
-	{
-		mem = (char **)malloc(sizeof(char *) * (fd - 3 + 2));
-		mem[fd - 3] = NULL;
-		mem[fd - 3 + 1] = NULL;
-	}
-	else if (fd - 3 < size_array(mem))
-	{
-		if (!mem[fd - 3])
-			return (NULL);
-	}
-	else
-	{
-		temp = (char **)malloc((fd - 3 + 2) * sizeof(char *));
-		if (!temp)
-			return (NULL);
-		while (i <= fd - 3 + 1)
-		{
-			if (i < fd - 3)
-			{
-				if (mem[i])
-				{
-					temp[i] = ft_strjoin(NULL, mem[i]);
-					free(mem[i]);
-				}
-				else
-					temp[i] = NULL;
-			}
-			else
-				temp[i] = NULL;
-			i++;
-		}
-		free(mem);
-		mem = temp;
-	}
 	mem[fd - 3] = str_with_lb_eof(fd, mem[fd - 3]);
-	if (!mem)
+	if (!mem[fd - 3])
 		return (NULL);
 	remains = get_substring(mem[fd - 3], idx_line_break(mem[fd - 3]) + 1, -1, 1);
 	str_til_lb_eof = get_substring(mem[fd - 3], 0, idx_line_break(mem[fd - 3]), 0);
 	free(mem[fd - 3]);
-	if (!remains)
-		remains = ft_strjoin(NULL, "");
 	mem[fd - 3] = remains;
-	// free_array(mem);
 	return (str_til_lb_eof);
 }

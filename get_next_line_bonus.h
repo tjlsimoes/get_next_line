@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:19:48 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 12:45:41 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:57:02 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define GET_NEXT_LINE_H
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 5
+#endif
+#ifndef FD_MAX
+# define FD_MAX 4096
 #endif
 # include <unistd.h>
 # include <stdlib.h>
