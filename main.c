@@ -1,5 +1,6 @@
 #include <fcntl.h>
 #include <stdio.h>
+#include <limits.h>
 #include "get_next_line.h"
 
 int	main(void)
@@ -8,7 +9,7 @@ int	main(void)
 	char	*output;
 	int		i;
 
-	fd = open("foo_f.txt", O_RDONLY);
+	fd = open("foo_i.txt", O_RDONLY);
 	i = 0;
 	// while((output = get_next_line(fd)))
 	// {

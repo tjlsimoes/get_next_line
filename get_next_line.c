@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 11:47:41 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:57:27 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	*get_next_line(int fd)
 	char		*remains;
 	char		*str_til_lb_eof;
 
-	// Buffer over INT_MAX
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	mem = str_with_lb_eof(fd, mem);
