@@ -6,11 +6,11 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:20:02 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 14:06:51 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:31:52 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	update_end(int *end, int b, char const *s)
 {
@@ -105,21 +105,66 @@ void	free_array(char **mem)
 // 	return (mem);
 // }
 
-#include <stdio.h>
+// char	**add_row(char ***mem, int fd)
+// {
+	
+// }
 
+int	size_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
 char	*get_next_line(int fd)
 {
 	static char	**mem;
+	char		**temp;
 	char		*remains;
 	char		*str_til_lb_eof;
+	int			i;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1
+		|| (fd > 3 && !mem))
 		return (NULL);
+	i = 0;
 	if (!mem)
 	{
 		mem = (char **)malloc(sizeof(char *) * (fd - 3 + 2));
 		mem[fd - 3] = NULL;
 		mem[fd - 3 + 1] = NULL;
+	}
+	else if (fd - 3 < size_array(mem))
+	{
+		if (!mem[fd - 3])
+			return (NULL);
+	}
+	else
+	{
+		temp = (char **)malloc((fd - 3 + 2) * sizeof(char *));
+		if (!temp)
+			return (NULL);
+		while (i <= fd - 3 + 1)
+		{
+			if (i < fd - 3)
+			{
+				if (mem[i])
+				{
+					temp[i] = ft_strjoin(NULL, mem[i]);
+					free(mem[i]);
+				}
+				else
+					temp[i] = NULL;
+			}
+			else
+				temp[i] = NULL;
+			i++;
+		}
+		free(mem);
+		mem = temp;
 	}
 	mem[fd - 3] = str_with_lb_eof(fd, mem[fd - 3]);
 	if (!mem)
@@ -127,6 +172,8 @@ char	*get_next_line(int fd)
 	remains = get_substring(mem[fd - 3], idx_line_break(mem[fd - 3]) + 1, -1, 1);
 	str_til_lb_eof = get_substring(mem[fd - 3], 0, idx_line_break(mem[fd - 3]), 0);
 	free(mem[fd - 3]);
+	if (!remains)
+		remains = ft_strjoin(NULL, "");
 	mem[fd - 3] = remains;
 	// free_array(mem);
 	return (str_til_lb_eof);

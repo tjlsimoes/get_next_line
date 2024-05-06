@@ -6,11 +6,11 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:19:38 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 12:19:39 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:06:11 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	idx_line_break(char *str)
 {
