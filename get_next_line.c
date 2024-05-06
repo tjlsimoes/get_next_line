@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:45:08 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/05/06 11:35:36 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:47:41 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,20 @@ char	*get_substring(char const *s, int b, int end, int remains)
 	return (substring);
 }
 
+void *free_null_rt(char *buffer)
+{
+	free(buffer);
+	return (NULL);
+}
+
 char	*str_with_lb_eof(int fd, char *str)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	int		chars_read;
-	int		i;
 
-	i = 0;
-	while (i < BUFFER_SIZE + 1)
-		buffer[i++] = '\0';
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
 	chars_read = 5;
 	while (idx_line_break(str) == -1 && chars_read)
 	{
@@ -62,12 +67,13 @@ char	*str_with_lb_eof(int fd, char *str)
 		if (!chars_read)
 			break ;
 		if (chars_read < 0)
-			return (NULL);
+			return (free_null_rt(buffer));
 		buffer[chars_read] = '\0';
 		str = ft_strjoin(str, buffer);
 		if (!str)
-			return (NULL);
+			return (free_null_rt(buffer));
 	}
+	free(buffer);
 	return (str);
 }
 
