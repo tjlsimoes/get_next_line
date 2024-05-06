@@ -8,23 +8,35 @@ int	main(void)
 	char	*output;
 	int		i;
 
-	fd = open("foo_g.txt", O_RDONLY);
+	fd = open("foo_f.txt", O_RDONLY);
 	i = 0;
-	while( i < 2 && (output = get_next_line(fd)))
+	// while((output = get_next_line(fd)))
+	// {
+	// 	printf("%s", output);
+	// 	free(output);
+	// 	output = NULL;
+	// 	i++;
+	// }
+	while (i < 6)
 	{
-		printf("%s", output);
-		free(output);
-		output = NULL;
+		output = get_next_line(fd);
+		if (output)
+		{
+			printf("%s", output);
+			free(output);
+		}
+		if (!output)
+			printf("NULL\n");
 		i++;
 	}
-	// output = get_next_line(fd);
+	output = get_next_line(fd);
 	// if (output)
 	// {
 	// 	printf("%s", output);
 	// 	free(output);
 	// }
-	if (!output)
-		printf("NULL\n");
+	// if (!output)
+	// 	printf("NULL\n");
 	close(fd);
 	// char buffer[BUFFER_SIZE];
 	// int bytes_read = read(fd, buffer, BUFFER_SIZE);
